@@ -7,6 +7,8 @@
 ## Overview
 This script is a Windows service that ensures your microphone volume stays at a constant level. It prevents external applications from modifying the microphone's volume, keeping it at the value set in the script. 
 
+The script modifies the volume of the **default microphone** set in the system sound settings. If you change the default microphone, the service will automatically control the new default device.
+
 If you need to change the microphone volume, you must stop and remove the service first before adjusting the volume manually.
 
 ## Features
@@ -45,7 +47,3 @@ pip install pycaw pywin32 comtypes
 ## Notes
 - Ensure you have the necessary permissions to install and manage Windows services.
 - If the service does not start, check the event logs or ensure your microphone is properly detected by the system.
-
-## License
-This project is licensed under the MIT License.
-
