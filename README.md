@@ -22,20 +22,20 @@ If you need to change the microphone volume, you must stop and remove the servic
 To install the service, run:
 ```sh
 python mic_volume_service.py install
-python mic_volume_service.py start
+sc start MicrophoneVolumeService
 ```
 After starting the service, open **Services** (`services.msc`), find **Microphone Volume Control Service**, right-click it, select **Properties**, and set **Startup type** to **Automatic**. This ensures the service starts automatically when the system boots.
 
 ### 2. Stop and remove the service
 If you need to change the microphone volume, you must first stop and remove the service:
 ```sh
-python mic_volume_service.py stop
-python mic_volume_service.py remove
+sc stop MicrophoneVolumeService
+sc delete MicrophoneVolumeService
 ```
 After that, adjust your microphone volume manually and reinstall the service if necessary.
 
 ## Requirements
-- `pycaw` library
+- `pycaw`
 - `pywin32`
 - `comtypes`
 
