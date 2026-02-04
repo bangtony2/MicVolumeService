@@ -1,4 +1,6 @@
 import sys
+import os
+import json
 import win32serviceutil
 import win32service
 import win32event
@@ -7,28 +9,42 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from pycaw.callbacks import AudioEndpointVolumeCallback
 
-TARGET_VOLUME_PERCENT = 85
+CONFIG_DIR = os.path.join(os.path.expanduser("~"), "Documents", "micfix")
+CONFIG_FILE = os.path.join(CONFIG_DIR, "config.json")
+DEFAULT_VOLUME = 85
 TOLERANCE = 1
+
+def load_config():
+    """Загрузка конфигурации из файла"""
+    try:
+        if os.path.exists(CONFIG_FILE):
+            with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+                return config.get('target_volume', DEFAULT_VOLUME)
+    except:
+        pass
+    return DEFAULT_VOLUME
 
 class VolumeChangeHandler(AudioEndpointVolumeCallback):
     def __init__(self, volume_interface):
         super().__init__()
         self.volume = volume_interface
+        self.target_volume = load_config()
         self._set_initial_volume()
     
     def _set_initial_volume(self):
         try:
             current = int(self.volume.GetMasterVolumeLevelScalar() * 100)
-            if abs(current - TARGET_VOLUME_PERCENT) > TOLERANCE:
-                self.volume.SetMasterVolumeLevelScalar(TARGET_VOLUME_PERCENT / 100.0, None)
+            if abs(current - self.target_volume) > TOLERANCE:
+                self.volume.SetMasterVolumeLevelScalar(self.target_volume / 100.0, None)
         except:
             pass
     
     def OnNotify(self, pNotify):
         try:
             current = int(self.volume.GetMasterVolumeLevelScalar() * 100)
-            if abs(current - TARGET_VOLUME_PERCENT) > TOLERANCE:
-                self.volume.SetMasterVolumeLevelScalar(TARGET_VOLUME_PERCENT / 100.0, None)
+            if abs(current - self.target_volume) > TOLERANCE:
+                self.volume.SetMasterVolumeLevelScalar(self.target_volume / 100.0, None)
         except:
             pass
 
