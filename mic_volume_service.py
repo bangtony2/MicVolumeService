@@ -15,7 +15,6 @@ DEFAULT_VOLUME = 85
 TOLERANCE = 1
 
 def load_config():
-    """Загрузка конфигурации из файла"""
     try:
         if os.path.exists(CONFIG_FILE):
             with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
@@ -29,22 +28,27 @@ class VolumeChangeHandler(AudioEndpointVolumeCallback):
     def __init__(self, volume_interface):
         super().__init__()
         self.volume = volume_interface
-        self.target_volume = load_config()
         self._set_initial_volume()
+    
+    def _get_target_volume(self):
+        """Динамическое чтение целевой громкости из конфига"""
+        return load_config()
     
     def _set_initial_volume(self):
         try:
+            target = self._get_target_volume()
             current = int(self.volume.GetMasterVolumeLevelScalar() * 100)
-            if abs(current - self.target_volume) > TOLERANCE:
-                self.volume.SetMasterVolumeLevelScalar(self.target_volume / 100.0, None)
+            if abs(current - target) > TOLERANCE:
+                self.volume.SetMasterVolumeLevelScalar(target / 100.0, None)
         except:
             pass
     
     def OnNotify(self, pNotify):
         try:
+            target = self._get_target_volume()
             current = int(self.volume.GetMasterVolumeLevelScalar() * 100)
-            if abs(current - self.target_volume) > TOLERANCE:
-                self.volume.SetMasterVolumeLevelScalar(self.target_volume / 100.0, None)
+            if abs(current - target) > TOLERANCE:
+                self.volume.SetMasterVolumeLevelScalar(target / 100.0, None)
         except:
             pass
 
