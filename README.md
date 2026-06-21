@@ -1,14 +1,17 @@
+<div align="center">
+  <br />
+  <a href="https://bangtony2.github.io/MicVolumeService/" target="_blank">
+    <img src="https://img.shields.io/badge/🌐_Visit_Official_Website-18181b?style=for-the-badge&logo=googlechrome&logoColor=3b82f6" alt="Official Website"/>
+  </a>
+  <br />
+  <br />
+</div>
+
 <div align="right">
   Language: 🇬🇧 <b>English</b> | <a href="README_UA.md">🇺🇦 Українська</a>
 </div>
 
 # 🎤 MICFix — Microphone Volume Lock Service
-
-<div align="center">
-  <a href="https://bangtony2.github.io/MicVolumeService/" target="_blank">
-    <img src="https://img.shields.io/badge/🌐_Visit_Official_Website-18181b?style=for-the-badge&logo=googlechrome&logoColor=3b82f6" alt="Official Website"/>
-  </a>
-</div>
 
 A lightweight Windows service (DLL) that **permanently locks your default microphone volume** to a specified level. No matter what — system changes, apps resetting volume, or manual adjustments — the volume snaps back **instantly**.
 

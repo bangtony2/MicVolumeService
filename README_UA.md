@@ -1,14 +1,17 @@
+<div align="center">
+  <br />
+  <a href="https://bangtony2.github.io/MicVolumeService/" target="_blank">
+    <img src="https://img.shields.io/badge/🌐_Відвідати_Офіційний_Сайт-18181b?style=for-the-badge&logo=googlechrome&logoColor=3b82f6" alt="Офіційний Сайт"/>
+  </a>
+  <br />
+  <br />
+</div>
+
 <div align="right">
   Мова: <a href="README.md">🇬🇧 English</a> | 🇺🇦 <b>Українська</b>
 </div>
 
 # 🎤 MICFix — Служба фіксації гучності мікрофона
-
-<div align="center">
-  <a href="https://bangtony2.github.io/MicVolumeService/" target="_blank">
-    <img src="https://img.shields.io/badge/🌐_Відвідати_Офіційний_Сайт-18181b?style=for-the-badge&logo=googlechrome&logoColor=3b82f6" alt="Офіційний Сайт"/>
-  </a>
-</div>
 
 Легка служба Windows (DLL), яка **назавжди фіксує гучність мікрофона** (за замовчуванням) на заданому рівні. Незалежно від того, чи змінила її система, сторонні застосунки або ви власноруч — гучність повертається назад **миттєво**.
 
