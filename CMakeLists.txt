@@ -9,15 +9,15 @@ set(CMAKE_CXX_FLAGS_RELEASE "/O2 /DNDEBUG" CACHE STRING "" FORCE)
 
 # ---- Service DLL (loaded by svchost.exe) ----
 add_library(MICFixService SHARED
-    MICFixService.cpp
-    MICFixService.def
+    src/MICFixService.cpp
+    src/MICFixService.def
 )
 target_link_libraries(MICFixService PRIVATE ole32 advapi32)
 
 # ---- Installer EXE ----
-add_executable(MICFixInstall MICFixInstall.cpp)
+add_executable(MICFixInstall src/MICFixInstall.cpp)
 target_link_libraries(MICFixInstall PRIVATE advapi32 shell32 ole32 user32)
 
 # ---- Uninstaller EXE ----
-add_executable(MICFixUninstall MICFixUninstall.cpp)
+add_executable(MICFixUninstall src/MICFixUninstall.cpp)
 target_link_libraries(MICFixUninstall PRIVATE advapi32 shell32 user32)

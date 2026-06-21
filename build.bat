@@ -11,7 +11,7 @@ echo.
 
 REM --- Service DLL (loaded by svchost.exe) ---
 echo [1/3] MICFixService.dll ...
-cl /nologo /O2 /MT /W3 /EHsc /LD MICFixService.cpp /DEF:MICFixService.def /link ole32.lib advapi32.lib /OUT:MICFixService.dll
+cl /nologo /O2 /MT /W3 /EHsc /LD src\MICFixService.cpp /DEF:src\MICFixService.def /link ole32.lib advapi32.lib /OUT:MICFixService.dll
 if %ERRORLEVEL% neq 0 (
     echo.
     echo  *** BUILD FAILED: MICFixService.dll ***
@@ -20,7 +20,7 @@ if %ERRORLEVEL% neq 0 (
 
 REM --- Installer EXE ---
 echo [2/3] MICFixInstall.exe ...
-cl /nologo /O2 /MT /W3 /EHsc MICFixInstall.cpp /Fe:MICFixInstall.exe /link advapi32.lib shell32.lib ole32.lib user32.lib
+cl /nologo /O2 /MT /W3 /EHsc src\MICFixInstall.cpp /Fe:MICFixInstall.exe /link advapi32.lib shell32.lib ole32.lib user32.lib
 if %ERRORLEVEL% neq 0 (
     echo.
     echo  *** BUILD FAILED: MICFixInstall.exe ***
@@ -29,7 +29,7 @@ if %ERRORLEVEL% neq 0 (
 
 REM --- Uninstaller EXE ---
 echo [3/3] MICFixUninstall.exe ...
-cl /nologo /O2 /MT /W3 /EHsc MICFixUninstall.cpp /Fe:MICFixUninstall.exe /link advapi32.lib shell32.lib user32.lib
+cl /nologo /O2 /MT /W3 /EHsc src\MICFixUninstall.cpp /Fe:MICFixUninstall.exe /link advapi32.lib shell32.lib user32.lib
 if %ERRORLEVEL% neq 0 (
     echo.
     echo  *** BUILD FAILED: MICFixUninstall.exe ***
