@@ -1,49 +1,119 @@
-# Microphone Volume Control Service
+# 🎤 MICFix — Microphone Volume Lock Service
 
-## Preview
+A lightweight Windows service (DLL) that **permanently locks your default microphone volume** to a specified level. No matter what — system changes, apps resetting volume, or manual adjustments — the volume snaps back **instantly**.
 
-![Microphone Volume Control Preview](preview.gif)
+## ✨ Key Features
 
-## Overview
-This script is a Windows service that ensures your microphone volume stays at a constant level. It prevents external applications from modifying the microphone's volume, keeping it at the value set in the script. 
+| Feature | Description |
+|---|---|
+| 🔒 **Volume Lock** | Enforces mic volume even if the system or user changes it |
+| ⚡ **Zero CPU Usage** | Fully event-driven architecture — no polling, no timers |
+| 📦 **DLL Service** | Runs through `svchost.exe` — no separate `.exe` process |
+| 🔄 **Live Config** | Edit `volume.json` → volume updates instantly |
+| 🎯 **Auto-detect** | Automatically follows default microphone changes |
+| 🚀 **One-Click Install** | Single `MICFixInstall.exe` — run once, done forever |
+| 🧹 **Clean Uninstall** | `MICFixUninstall.exe` removes everything |
 
-The script modifies the volume of the **default microphone** set in the system sound settings. If you change the default microphone, the service will automatically control the new default device.
+## 🏗️ Architecture
 
-If you need to change the microphone volume, you must stop and remove the service first before adjusting the volume manually.
-
-## Features
-- Automatically maintains the microphone volume at a fixed percentage.
-- Prevents unauthorized applications from changing the microphone volume.
-- Runs as a Windows service in the background.
-
-## Installation & Usage
-
-### 1. Install the service
-To install the service, run:
-```sh
-python mic_volume_service.py install
-sc start MicrophoneVolumeService
 ```
-After starting the service, open **Services** (`services.msc`), find **Microphone Volume Control Service**, right-click it, select **Properties**, and set **Startup type** to **Automatic**. This ensures the service starts automatically when the system boots.
-
-### 2. Stop and remove the service
-If you need to change the microphone volume, you must first stop and remove the service:
-```sh
-sc stop MicrophoneVolumeService
-sc delete MicrophoneVolumeService
-```
-After that, adjust your microphone volume manually and reinstall the service if necessary.
-
-## Requirements
-- `pycaw`
-- `pywin32`
-- `comtypes`
-
-You can install dependencies using:
-```sh
-pip install pycaw pywin32 comtypes
+svchost.exe -k MICFixGroup
+    └── MICFixService.dll
+            ├── IAudioEndpointVolumeCallback  → volume changed? → set it back
+            ├── IMMNotificationClient         → mic changed? → re-attach
+            └── FindFirstChangeNotification   → config changed? → re-read
 ```
 
-## Notes
-- Ensure you have the necessary permissions to install and manage Windows services.
-- If the service does not start, check the event logs or ensure your microphone is properly detected by the system.
+**How it achieves 0% CPU:**
+The service sleeps in `WaitForMultipleObjects` and wakes up **only** when one of these OS-level events fires. No loops, no `Sleep()` polling, no CPU burn.
+
+## 📥 Installation
+
+### Pre-built (Recommended)
+1. Download `MICFixService.dll` + `MICFixInstall.exe` from [Releases](https://github.com/bangtony2/MicVolumeService/releases)
+2. Place both files in the same folder
+3. Run `MICFixInstall.exe` as Administrator
+4. ✅ Done! Microphone volume is now locked
+
+### Build from Source
+Requires **MSVC Build Tools 2022** (or Visual Studio with C++ workload).
+
+```bash
+# Open "Developer Command Prompt for VS 2022"
+git clone https://github.com/bangtony2/MicVolumeService.git
+cd MicVolumeService
+build.bat
+```
+
+Output:
+- `MICFixService.dll` — Service DLL (loaded by svchost.exe)
+- `MICFixInstall.exe` — One-time installer
+- `MICFixUninstall.exe` — Uninstaller
+
+**CMake alternative:**
+```bash
+cmake -B build -G "Visual Studio 17 2022"
+cmake --build build --config Release
+```
+
+## ⚙️ Configuration
+
+After installation, a config file is created at:
+```
+Documents\MICFix\volume.json
+```
+
+```json
+{
+  "volume": 85
+}
+```
+
+- Change the value (0–100) and **save** — the volume updates **instantly**
+- No need to restart the service
+
+## 🧹 Uninstall
+
+1. Run `MICFixUninstall.exe` as Administrator
+2. Service is stopped and removed
+3. Your config (`volume.json`) is preserved
+
+## 🔧 How It Works
+
+| Component | Purpose |
+|---|---|
+| `MICFixService.dll` | Core service DLL loaded by `svchost.exe` |
+| `IAudioEndpointVolumeCallback` | COM callback — fires when anyone changes mic volume |
+| `IMMNotificationClient` | COM callback — fires when default mic device changes |
+| `FindFirstChangeNotification` | Win32 API — fires when `volume.json` is modified |
+| `WaitForMultipleObjects` | Sleeps thread until any event fires (0% CPU) |
+
+### What the Installer Does
+1. Creates `Documents\MICFix\volume.json` (default 85%)
+2. Copies `MICFixService.dll` to `C:\ProgramData\MICFix\`
+3. Registers a svchost group (`MICFixGroup`)
+4. Creates the Windows service with `SERVICE_AUTO_START`
+5. Starts the service immediately
+
+## 📁 Project Structure
+
+```
+MicVolumeService/
+├── MICFixService.cpp    # Service DLL — Core logic (audio, config, events)
+├── MICFixService.def    # DLL export definition (ServiceMain)
+├── MICFixInstall.cpp    # Installer (run once)
+├── MICFixUninstall.cpp  # Uninstaller
+├── build.bat            # MSVC build script
+├── CMakeLists.txt       # CMake build configuration
+└── README.md
+```
+
+## 📋 Requirements
+
+- **OS:** Windows 10 / 11
+- **Build:** MSVC Build Tools 2022+ (or Visual Studio with C++ Desktop workload)
+- **Runtime:** None — statically linked (`/MT`), zero external dependencies
+
+## 📜 License
+
+MIT

@@ -1,0 +1,38 @@
+# Build output
+*.exe
+*.dll
+*.obj
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.idb
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.sln.docstates
+x64/
+x86/
+Debug/
+Release/
+
+# CMake
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
