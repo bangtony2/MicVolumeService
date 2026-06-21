@@ -1,3 +1,7 @@
+<div align="right">
+  Language: 🇬🇧 <b>English</b> | <a href="README_UA.md">🇺🇦 Українська</a>
+</div>
+
 # 🎤 MICFix — Microphone Volume Lock Service
 
 A lightweight Windows service (DLL) that **permanently locks your default microphone volume** to a specified level. No matter what — system changes, apps resetting volume, or manual adjustments — the volume snaps back **instantly**.
