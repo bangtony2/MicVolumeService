@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Tags -->
+    <title>MICFix | The Ultimate Microphone Volume Lock for Windows</title>
+    <meta name="description" content="A lightweight, zero-CPU Windows service that permanently locks your default microphone volume. Fully event-driven, instantly reverts unwanted changes.">
+    
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="MICFix | Microphone Volume Lock">
+    <meta property="og:description" content="Stop apps from changing your mic volume. Zero-CPU usage, Windows native DLL service.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bangtony2.github.io/MicVolumeService/">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    
+    <!-- Ambient glowing background blobs -->
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">MIC<span>Fix</span></div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#installation">Installation</a>
+                <a href="https://github.com/bangtony2/MicVolumeService" target="_blank" class="github-link">
+                    <svg height="24" viewBox="0 0 16 16" width="24" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content animate-up">
+            <div class="badge">Version 1.0 Available Now</div>
+            <h1>Take Control of Your <br><span class="gradient-text">Microphone Volume</span></h1>
+            <p class="subtitle">A lightweight, zero-CPU Windows service that permanently locks your default microphone volume. No matter what apps or games try to change it — it snaps back instantly.</p>
+            
+            <div class="cta-group">
+                <a href="https://github.com/bangtony2/MicVolumeService/releases/download/v1.0/MICFix_Release_v1.0.zip" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Download v1.0
+                </a>
+                <a href="#installation" class="btn btn-secondary">Documentation</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="features" class="section">
+            <div class="section-header animate-up">
+                <h2>Why use MICFix?</h2>
+                <p>Built completely from the ground up for Windows with performance in mind.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card glass animate-up">
+                    <div class="feature-icon lock">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <h3>Volume Lock</h3>
+                    <p>Enforces your desired mic volume. If a game, app, or system update tries to change it, MICFix instantly reverts the change.</p>
+                </div>
+                
+                <div class="feature-card glass animate-up" style="transition-delay: 100ms;">
+                    <div class="feature-icon cpu">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                    </div>
+                    <h3>0% CPU Usage</h3>
+                    <p>Fully event-driven architecture using Win32 and COM events. No polling loops, no timers. It literally sleeps until an event fires.</p>
+                </div>
+                
+                <div class="feature-card glass animate-up" style="transition-delay: 200ms;">
+                    <div class="feature-icon stealth">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                    </div>
+                    <h3>Invisible Service</h3>
+                    <p>Runs as a native DLL payload through Windows svchost.exe. There are no annoying .exe files lingering in your Task Manager.</p>
+                </div>
+                
+                <div class="feature-card glass animate-up" style="transition-delay: 300ms;">
+                    <div class="feature-icon config">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </div>
+                    <h3>Live Configuration</h3>
+                    <p>Edit your volume.json file to adjust the volume percentage. The service updates instantly in real-time without needing a restart.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="installation" class="section">
+            <div class="section-header animate-up">
+                <h2>Installation & Usage</h2>
+                <p>Getting started is incredibly simple.</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step glass animate-up">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Download & Extract</h3>
+                        <p>Download the latest release zip from the button above. Extract the contents (<code>MICFixService.dll</code> and <code>MICFixInstall.exe</code>) into a single folder.</p>
+                    </div>
+                </div>
+                
+                <div class="step glass animate-up">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Install</h3>
+                        <p>Right-click on <code>MICFixInstall.exe</code> and select <strong>"Run as Administrator"</strong>. You only need to do this once. The service will automatically start with Windows forever.</p>
+                    </div>
+                </div>
+                
+                <div class="step glass animate-up">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Configure</h3>
+                        <p>Navigate to your Documents folder and find the newly created <code>MICFix\volume.json</code>. Edit this file to change your desired volume level (0-100).</p>
+                        <div class="code-block">
+<pre><code>{
+  "volume": 85
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="uninstall-banner glass animate-up">
+                <div class="uninstall-text">
+                    <h3>Want to remove it?</h3>
+                    <p>Run <code>MICFixUninstall.exe</code> as Administrator. It will cleanly stop the service, unregister the DLL, and remove all registry entries, leaving no traces behind.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Built with native Win32 APIs for maximum performance.</p>
+            <p class="copyright">© 2025 bangtony2. Released under the MIT License.</p>
+        </div>
+    </footer>
+</body>
+</html>
