@@ -489,3 +489,11 @@ footer {
 .lang-option:hover {
     background: rgba(255, 255, 255, 0.1);
 }
+
+/* Flag Images */
+.lang-btn img, .lang-option img {
+    width: 20px;
+    height: auto;
+    border-radius: 2px;
+    display: block;
+}

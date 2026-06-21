@@ -64,8 +64,8 @@ const translations = {
 };
 
 const flags = {
-    en: "🇺🇸",
-    ua: "🇺🇦"
+    en: '<img src="https://flagcdn.com/w20/us.png" alt="US">',
+    ua: '<img src="https://flagcdn.com/w20/ua.png" alt="UA">'
 };
 
 let currentLang = 'en';
